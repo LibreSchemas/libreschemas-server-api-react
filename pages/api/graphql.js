@@ -12,33 +12,19 @@ import { ApolloServer, gql } from 'apollo-server-micro'
 import typeDefs from '../../db/schema'
 import resolvers from '../../db/resolvers'
 import connectDb from '../../db/config'
+import('next').NextConfig
 
+const { 
+  ApolloServerPluginLandingPageLocalDefault,
+} = require('apollo-server-core');
 
 connectDb();
 
-const apolloServer = new ApolloServer({ typeDefs, resolvers, introspection: true, playground: true })
+const apolloServer = new ApolloServer({ typeDefs, resolvers, introspection: true, plugins: [ ApolloServerPluginLandingPageLocalDefault({ footer: false }) ] })
 
 const startServer = apolloServer.start()
 
 const handler = async (req, res) => {
-
-  res.setHeader('Access-Control-Allow-Credentials', 'true')
-  res.setHeader(
-    'Access-Control-Allow-Origin',
-    '*'
-  )
-  res.setHeader(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept'
-  )
-  res.setHeader(
-    'Access-Control-Allow-Methods',
-    'GET,HEAD,OPTIONS,POST,PUT'
-  )
-  if (req.method === 'OPTIONS') {
-    res.end()
-    return false
-  }
 
   await startServer
   await apolloServer.createHandler({

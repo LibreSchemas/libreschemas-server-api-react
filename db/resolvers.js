@@ -9,6 +9,7 @@
     You should have received a copy of the GNU Affero General Public License along with LibreSchemas Server API for React. If not, see <https://www.gnu.org/licenses/>.
 */
 
+
 const Schemas = require('./models/schemas')
 
 const resolvers = {

@@ -144,4 +144,4 @@ const SchemasSchema = new Schema({
       timestamps: true
 })
 
-module.exports = mongoose.model("schemas", SchemasSchema, "schemas")
+module.exports = mongoose.model("schemas", SchemasSchema)
