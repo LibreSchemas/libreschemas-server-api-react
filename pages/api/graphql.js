@@ -16,7 +16,7 @@ import connectDb from '../../db/config'
 
 connectDb();
 
-const apolloServer = new ApolloServer({ typeDefs, resolvers })
+const apolloServer = new ApolloServer({ typeDefs, resolvers, introspection: true, playground: true })
 
 const startServer = apolloServer.start()
 
