@@ -19,7 +19,7 @@ const apolloServer = new ApolloServer({ typeDefs, resolvers, introspection: true
 
 const startServer = apolloServer.start()
 
-+const handler = async (req, res) => {
+const handler = async (req, res) => {
 
   res.setHeader('Access-Control-Allow-Credentials', 'true')
   res.setHeader(
