@@ -8,3 +8,20 @@
 
     You should have received a copy of the GNU Affero General Public License along with LibreSchemas Server API for React. If not, see <https://www.gnu.org/licenses/>.
 */
+
+import Head from 'next/head'
+import Image from 'next/image'
+
+const Home  = () => {
+  return (
+    <div>
+      <Head>
+        <title>LibreSchemas API</title>
+        <meta name="description" content="LibreSchemas API" />
+      </Head>
+      <h1>LibreSchemas API</h1>
+    </div>
+  )
+}
+
+export default Home
