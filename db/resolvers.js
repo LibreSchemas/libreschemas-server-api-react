@@ -51,6 +51,15 @@ const resolvers = {
 
       return schema
     },
+    // metadata
+    getMetaData: async (_, { id }) => {
+        const metadata = await MetaData.findById(id)
+        if (!metadata) {
+          throw new Error('Metadata not found')
+        }
+        return metadata
+
+    },
   },
 
   Mutation: {
