@@ -13,6 +13,34 @@ import { gql } from 'apollo-server-micro'
 
 const typeDefs = gql`
 
+  # communication Styles
+  type communication_style {
+    communication_style_type: String
+    communication_style_presentation: String
+  }
+
+  # conflict_types
+  type conflict_types {
+    conflict_type_label: String
+    conflict_type_explainer: String
+  }
+
+  # Tactics
+  type tactics {
+    tactic_type: String
+    description: String
+    communication_styles: [communication_style]
+    rank: Int
+  }
+
+  # challenges
+  type challenges {
+    description: String
+    tactics: [tactics]
+    conflict_types: [conflict_types]
+    rank: Int
+  }
+
   # Behaviours
   type behaviours {
     type: String
@@ -27,6 +55,8 @@ const typeDefs = gql`
     rank: Int
     behaviours_available: Boolean
     behaviours: [behaviours]
+    challenges_available: Boolean
+    challenges: [challenges]
   }
 
   # Schemas
@@ -39,21 +69,46 @@ const typeDefs = gql`
     shortuuid: String
     type: String
     events: [Events]
-    author_name: String
-    author_location: String
-    author_email: String
-    author_twitter: String
-    author_linkedin: String
-    author_website: String
-    version: String
-    license: String
-    license_terms: String
+  }
+
+  input SchemasInput {
+    name: String!
+    category: String!
+  }
+
+  # Categories
+  type Categories {
+    category: String
+    description: String
+    icon: String
+    rank: Int
+  }
+
+  # Metadata
+  type MetaData {
+    id: ID!
+    generic_categories: [Categories]
+    latest_version_android: String
+    latest_version_ios: String
   }
 
   type Query {
     getSchema(id: ID!): Schemas
     getSchemas: [Schemas]
     getSchemasByCategory(categoryName: String!): [Schemas]
+    getSchemasByShortUUID(shortuuid: String!): [Schemas]
+    getUserByFireBaseUID: Users
+    getUser: Users
+    getMetaData(id: ID!): MetaData
+  }
+
+  type Mutation {
+    # Schemas
+    newSchema(input: SchemasInput): Schemas
+    updateSchema(id: ID!, input: SchemasInput): Schemas
+    deleteSchema(id: ID!): String
+    # Users
+    insertOrUpdateUser(firebase_uid: String!, email: String, name: String): Users
   }
 
 `
@@ -94,6 +149,24 @@ query GetSchema($getSchemaId: ID!) {
       behaviours {
         description
         type
+      }
+      challenges_available
+      challenges {
+        description
+        conflict_types {
+            conflict_type_label
+            conflict_type_explainer
+        }
+        rank
+        tactics {
+          tactic_type
+          description
+          rank
+          communication_styles {
+            communication_style_type
+            communication_style_presentation
+          }
+        }
       }
     }
   }

@@ -11,6 +11,7 @@
 
 
 const Schemas = require('./models/schemas')
+const MetaData = require('./models/metadata')
 
 const resolvers = {
   Query: {
@@ -33,6 +34,15 @@ const resolvers = {
         console.log(err)
       }
     },
+    getSchemasByShortUUID: async (_, { shortuuid } ) => {
+      try {
+        const schemas = await Schemas.find( { shortuuid: shortuuid } ).exec();
+
+        return schemas
+      } catch (err) {
+        console.log(err)
+      }
+    },
     getSchema: async (_, { id }) => {
       const schema = await Schemas.findById(id)
 
@@ -44,6 +54,58 @@ const resolvers = {
     },
   },
 
+  Mutation: {
+    insertOrUpdateUser: async (_, { firebase_uid, email, name }) => {
+      try {
+        var query = { firebase_uid },
+        update = { firebase_uid: firebase_uid, name: name, email: email},
+        options = { upsert: true, new: true, setDefaultsOnInsert: true };
+
+        Users.findOneAndUpdate(query, update, options, function(error, result) {
+          if (error) console.log(err);
+          return true;
+        });
+      } catch (err) {
+        console.log(err)
+        return err
+      }
+    },
+    newSchema: async (_, { input }) => {
+      try {
+        const schema = new Schemas(input)
+
+        const result = await schema.save()
+
+        return result
+      } catch (err) {
+        console.log(err)
+      }
+    },
+    updateSchema: async (_, { id, input }) => {
+      let schema = await Schemas.findById(id)
+
+      if (!schema) {
+        throw new Error('Schema not found')
+      }
+
+      schema = await Schemas.findOneAndUpdate({ _id: id }, input, {
+        new: true,
+      })
+
+      return product
+    },
+    deleteSchema: async (_, { id }) => {
+      const schema = await Schemas.findById(id)
+
+      if (!schema) {
+        throw new Error('Schema not found')
+      }
+
+      await schema.findOneAndDelete({ _id: id })
+
+      return 'Schema deleted'
+    },
+  },
 }
 
 module.exports = resolvers
