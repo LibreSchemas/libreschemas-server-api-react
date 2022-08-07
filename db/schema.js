@@ -95,8 +95,6 @@ const typeDefs = gql`
     getSchemas: [Schemas]
     getSchemasByCategory(categoryName: String!): [Schemas]
     getSchemasByShortUUID(shortuuid: String!): [Schemas]
-    getUserByFireBaseUID: Users
-    getUser: Users
     getMetaData(id: ID!): MetaData
   }
 
@@ -105,8 +103,6 @@ const typeDefs = gql`
     newSchema(input: SchemasInput): Schemas
     updateSchema(id: ID!, input: SchemasInput): Schemas
     deleteSchema(id: ID!): String
-    # Users
-    insertOrUpdateUser(firebase_uid: String!, email: String, name: String): Users
   }
 
 `

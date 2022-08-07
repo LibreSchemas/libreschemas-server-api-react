@@ -40,14 +40,6 @@ const MetaDataSchema = new Schema({
   generic_categories: {
     type: [CategoriesSchema],
   },
-  latest_version_android: {
-    type: String,
-    trim: true,
-  },
-  latest_version_ios: {
-    type: String,
-    trim: true,
-  },
 })
 
 module.exports = mongoose.model("metadata", MetaDataSchema, "metadata")

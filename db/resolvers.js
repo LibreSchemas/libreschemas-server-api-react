@@ -54,21 +54,6 @@ const resolvers = {
   },
 
   Mutation: {
-    insertOrUpdateUser: async (_, { firebase_uid, email, name }) => {
-      try {
-        var query = { firebase_uid },
-        update = { firebase_uid: firebase_uid, name: name, email: email},
-        options = { upsert: true, new: true, setDefaultsOnInsert: true };
-
-        Users.findOneAndUpdate(query, update, options, function(error, result) {
-          if (error) console.log(err);
-          return true;
-        });
-      } catch (err) {
-        console.log(err)
-        return err
-      }
-    },
     newSchema: async (_, { input }) => {
       try {
         const schema = new Schemas(input)
