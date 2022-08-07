@@ -165,7 +165,7 @@ const SchemasSchema = new Schema({
     type: String,
     required: true,
     trim: true,
-  }
+  },
   events: {
     type: [EventsSchema],
     required: true,
