@@ -170,7 +170,6 @@ const SchemasSchema = new Schema({
     type: [EventsSchema],
     required: true,
   },
-,
   author_name: {
     type: String,
     required: true,
