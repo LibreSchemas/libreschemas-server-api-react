@@ -88,8 +88,6 @@ const typeDefs = gql`
   type MetaData {
     id: ID!
     generic_categories: [Categories]
-    latest_version_android: String
-    latest_version_ios: String
   }
 
   type Query {
