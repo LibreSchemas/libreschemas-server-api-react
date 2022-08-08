@@ -1,4 +1,4 @@
-# LibreSchemas Server
+# LibreSchemas
 
 The LibreSchemas project is a ongoing project of Free and Open Source Software (FOSS), under various Copyleft licenses, that are designed to help those who identify as Neurodivergent (read more about the Neurodiversity Movement here). Libre means being “free, having liberty, at liberty” in Spanish and French. Liberty is an important principle for the Neurodiversity Movement as having free will and the right to be different in the pursuit of happiness are considered inalienable rights to most people. The Schemas part of LibreSchemas was originally derived from NeuroSchemas, an original App created by Shaun Vos, that was released in June 2021 to assist Autistic people in learning the hidden curriculum from its Social Schemas.
 
