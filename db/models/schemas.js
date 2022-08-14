@@ -38,6 +38,24 @@ const ConflictTypesSchema = new Schema({
   },
 })
 
+const AdjustmentsSchema = new Schema({
+  adjustment_type: {
+    type: String,
+    required: false,
+    trim: true,
+  },
+  description: {
+    type: String,
+    required: false,
+    trim: true,
+  },
+  rank: {
+    type: Number,
+    required: false,
+    trim: true,
+  },
+})
+
 const TacticsSchema = new Schema({
   tactic_type: {
     type: String,
@@ -131,6 +149,14 @@ const EventsSchema = new Schema({
   },
   challenges: {
     type: [ChallengesSchema],
+    required: false,
+  },
+  adjustments_available: {
+    type: Boolean,
+    required: true,
+  },
+  adjustments: {
+    type: [AdjustmentsSchema],
     required: false,
   },
 })

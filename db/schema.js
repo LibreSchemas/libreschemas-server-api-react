@@ -41,6 +41,13 @@ const typeDefs = gql`
     rank: Int
   }
 
+  # Adjustments
+  type adjustments {
+    adjustment_type: String
+    description: String
+    rank: Int
+  }
+
   # Behaviours
   type behaviours {
     type: String
@@ -57,6 +64,8 @@ const typeDefs = gql`
     behaviours: [behaviours]
     challenges_available: Boolean
     challenges: [challenges]
+    adjustments_available: Boolean
+    adjustments: [adjustments]
   }
 
   # Schemas
